@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Premium | Receitas para Congelar</title>
+    
+    <!-- Fontes de Luxo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones Profissionais -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg: #FDFCF9;
+            --primary: #1B3C35; /* Verde Floresta Luxo */
+            --accent: #E2725B;  /* Terracota para Conversão */
+            --text: #1A1A1A;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Camada de Grão/Textura Premium */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05; pointer-events: none; z-index: 9999;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .serif { font-family: 'Fraunces', serif; }
+
+        /* Barra de Oferta (Ticker) */
+        .ticker { background: var(--primary); color: var(--bg); padding: 12px 0; overflow: hidden; white-space: nowrap; }
+        .ticker-wrap { display: inline-block; animation: ticker 40s linear infinite; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Hero Section */
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; padding: 80px 0; align-items: center; }
+        @media (max-width: 968px) { .hero { grid-template-columns: 1fr; text-align: center; padding: 40px 0; } }
+
+        /* Animações de Revelação */
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(27, 60, 53, 0.06); padding: 8px 16px; border-radius: 100px; font-size: 11px; font-weight: 700; color: var(--primary); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .title { font-size: clamp(2.8rem, 7vw, 5.5rem); line-height: 0.9; margin-bottom: 24px; }
+        .title span { color: var(--accent); font-style: italic; font-weight: 300; }
+
+        .desc { font-size: 1.15rem; color: var(--text-light); margin-bottom: 32px; max-width: 540px; }
+        @media (max-width: 968px) { .desc { margin: 0 auto 32px auto; } }
+
+        /* Botão Cakto Animado */
+        .btn-cta {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            background: var(--primary); color: var(--white); padding: 22px 48px; border-radius: 20px;
+            text-decoration: none; font-weight: 700; font-size: 20px;
+            box-shadow: 0 20px 40px rgba(27, 60, 53, 0.2); transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .btn-cta:hover { transform: scale(1.05) translateY(-5px); background: #244d44; }
+        
+        /* Efeito de Brilho que passa pelo botão */
+        .btn-cta::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-cta:hover::after { left: 100%; }
+
+        /* Imagem Hero */
+        .img-container { position: relative; background: var(--white); padding: 15px; border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.08); }
+        .img-container img { width: 100%; border-radius: 30px; display: block; aspect-ratio: 4/5; object-fit: cover; background-color: #f0f0f0; }
+        
+        .floating-badge { 
+            position: absolute; top: -20px; right: -20px; background: var(--accent); color: var(--white); 
+            width: 105px; height: 105px; border-radius: 50%; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; font-weight: 700; transform: rotate(12deg); 
+            box-shadow: 0 10px 20px rgba(226, 114, 91, 0.3); z-index: 5;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(12deg); } 50% { transform: translateY(-10px) rotate(15deg); } }
+
+        /* Depoimentos */
+        .testimonials { background: #f8f7f2; padding: 100px 0; margin-top: 50px; }
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .testi-card { background: var(--white); padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.03); transition: var(--transition); }
+        .testi-card:hover { transform: translateY(-10px); }
+        .stars { color: #fbbf24; margin-bottom: 15px; display: flex; gap: 2px; }
+
+        footer { padding: 60px 0; text-align: center; color: var(--text-light); font-size: 14px; border-top: 1px solid rgba(0,0,0,0.05); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Ticker Superior -->
+    <div class="ticker">
+        <div class="ticker-wrap">
+            ● OFERTA EXCLUSIVA: DE R$ 147 POR R$ 18,90 ● ACESSO VITALÍCIO ● ENTREGA IMEDIATA NO E-MAIL ● GARANTIA DE 30 DIAS ● &nbsp;
+            ● OFERTA EXCLUSIVA: DE R$ 147 POR R$ 18,90 ● ACESSO VITALÍCIO ● ENTREGA IMEDIATA NO E-MAIL ● GARANTIA DE 30 DIAS ● &nbsp;
+        </div>
+    </div>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="reveal active">
+                    <div class="badge">
+                        <i data-lucide="check-circle" size="14"></i>
+                        Método Testado e Aprovado
+                    </div>
+                </div>
+
+                <h1 class="title serif reveal active" style="transition-delay: 0.1s;">
+                    Receitas <br>
+                    <span>saudáveis</span> para <br>
+                    congelar.
+                </h1>
+
+                <p class="desc reveal active" style="transition-delay: 0.2s;">
+                    Recupere seu tempo e saúde. Aprenda a cozinhar uma única vez e tenha refeições prontas para a semana toda, sem perder o sabor.
+                </p>
+
+                <div class="reveal active" style="transition-delay: 0.3s;">
+                    <!-- COLOQUE SEU LINK DA CAKTO ABAIXO -->
+                    <a href="https://pay.cakto.com.br/LINK_AQUI" class="btn-cta">
+                        QUERO AS RECEITAS AGORA
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+
+                    <div style="margin-top: 25px;">
+                        <span style="text-decoration: line-through; color: var(--text-light); font-size: 14px;">De R$ 147,00</span> <br>
+                        <span class="serif" style="font-size: 36px; font-weight: 700;">Por R$ 18,90 <small style="font-size: 14px; font-weight: 400; opacity: 0.6;">(Pagamento Único)</small></span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 20px; opacity: 0.6; font-size: 12px; font-weight: 600;">
+                        <i data-lucide="lock" size="14" style="color: var(--primary);"></i> 
+                        PAGAMENTO 100% SEGURO VIA CAKTO
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image reveal active" style="transition-delay: 0.4s;">
+                <div class="floating-badge">
+                    <span style="font-size: 10px;">MAIS DE</span>
+                    <span style="font-size: 28px;">100+</span>
+                    <span style="font-size: 10px;">RECEITAS</span>
+                </div>
+                <div class="img-container">
+                    <!-- Substitua pela sua imagem real -->
+                    <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=800" alt="Cozinha Saudável">
+                </div>
+                <p style="text-align: center; font-size: 10px; letter-spacing: 3px; color: #aaa; margin-top: 20px; text-transform: uppercase;">
+                    Fig. 01 — Método Completo 2024
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Seção de Prova Social -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="reveal" style="text-align: center;">
+                <h2 class="serif" style="font-size: 42px; margin-bottom: 10px;">Aprovado por <span style="font-style: italic; color: var(--accent);">centenas</span> de pessoas</h2>
+                <p style="color: var(--text-light);">Resultados reais de quem aplicou o método.</p>
+            </div>
+
+            <div class="testi-grid">
+                <div class="testi-card reveal">
+                    <div class="stars">
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                    </div>
+                    <p style="font-style: italic; margin-bottom: 20px; color: var(--text);">"Minha rotina mudou! Eu não tenho mais que pensar no que cozinhar todo dia. Sigo o guia e minha semana flui."</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">AM</div>
+                        <div><strong>Ana Maria</strong><br><small style="color: var(--text-light)">Aluna do Método</small></div>
+                    </div>
+                </div>
+
+                <div class="testi-card reveal">
+                    <div class="stars">
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                        <i data-lucide="star" fill="currentColor" size="16"></i>
+                    </div>
+                    <p style="font-style: italic; margin-bottom: 20px; color: var(--text);">"As técnicas de congelamento são incríveis. A comida não fica com aquele gosto de geladeira. Nota 10!"</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">JP</div>
+                        <div><strong>João Pedro</strong><br><small style="color: var(--text-light)">Aluno do Método</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="serif" style="font-size: 20px; color: var(--primary); font-weight: 700; margin-bottom: 10px;">BRAND NAME</p>
+            <p>Este site não é afiliado ao Facebook ou Google. <br> © 2024 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Ativar Ícones Lucide
+        lucide.createIcons();
+
+        // Sistema de Revelação ao Rolar a Página
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
